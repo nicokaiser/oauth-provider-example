@@ -2,7 +2,7 @@
 
 var clients = [
     { clientId: 'client1', name: 'Client 1', clientSecret: 'secret1' },
-    { clientId: 'client2', name: 'Client 2', clientSecret: 'secret2' }
+    { clientId: 'oauth-consumer-example', name: 'OAuth Consumer Example Client', clientSecret: 'secret2' }
 ];
 
 exports.findByClientId = function (clientId, done) {

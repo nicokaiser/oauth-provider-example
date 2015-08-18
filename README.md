@@ -14,6 +14,8 @@ $ npm install
 $ node app.js
 ```
 
+An example consumer can be found at [oauth-consumer-example](https://github.com/nicokaiser/oauth-consumer-example).
+
 
 Authorization
 -------------

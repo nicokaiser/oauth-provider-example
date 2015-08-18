@@ -3,6 +3,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
+var morgan = require('morgan');
 var passport = require('passport');
 var session = require('express-session');
 var oauth = require('./oauth');
@@ -10,6 +11,7 @@ var oauth = require('./oauth');
 
 var app = express();
 app.set('view engine', 'ejs');
+app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
@@ -46,6 +48,18 @@ app.post('/token', oauth.token);
 
 app.get('/restricted', passport.authenticate('accessToken', {session: false}), function (req, res) {
     res.send('Yay, you successfully accessed the restricted resource!');
+});
+
+app.get('/me', passport.authenticate('accessToken', {session: false}), function (req, res) {
+    res.send({
+        id: req.user.id,
+        name: req.user.name,
+        username: req.user.username
+    });
+});
+
+app.get('/time', passport.authenticate('accessToken', {session: false}), function (req, res) {
+    res.send(new Date());
 });
 
 app.use(function (err, req, res, next) {
