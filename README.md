@@ -95,7 +95,7 @@ After pressing "Allow", the user is redirected to the `redirect_uri` with the ac
 
 ```
 HTTP/1.1 302 Found
-Location: http://api.example.com/cb#access_token=6iYAL...&expires_in=2015-08-18T09%3A12%3A11.282Z&token_type=Bearer&state=xyz
+Location: http://api.example.com/cb#access_token=6iYAL...&expires_in=3600&token_type=Bearer&state=xyz
 ```
 
 In case of an error (e.g. the user denied access), the error code is added to the URL hash:
