@@ -30,7 +30,7 @@ The authorization code grant flow is typically used for web server applications.
 #### Authorization Request
 
 ```
-http://localhost:3000/authorization?response_type=code&client_id=client1&state=xyz&redirect_uri=http://api.example.com/cb
+http://localhost:3000/oauth2/auth?response_type=code&client_id=client1&state=xyz&redirect_uri=http://api.example.com/cb
 ```
 
 Once the use is logged in (try "bob", "secret" in this example), the authorization dialog is displayed ("Client 1 is requesting access to your account."). After pressing "Allow", the user is redirected to the `redirect_uri` with a `code` parameter:
@@ -52,14 +52,14 @@ Location: http://api.example.com/cb?error=access_denied&state=xyz
 The web server application can request access tokens and refres tokens in the background by using the code:
 
 ```
-$ curl -d "grant_type=authorization_code&code=fCUHnidI4tOidJLS&client_id=client1&client_secret=secret1&redirect_uri=http://api.example.com/cb" http://localhost:3000/token
+$ curl -d "grant_type=authorization_code&code=fCUHnidI4tOidJLS&client_id=client1&client_secret=secret1&redirect_uri=http://api.example.com/cb" http://localhost:3000/oauth2/token
 ```
 
 ```
 {
     "access_token":"vBmly...",
     "refresh_token":"kjzpM...",
-    "expires_in":"2015-08-18T09:08:27.419Z",
+    "expires_in":3600,
     "token_type":"Bearer"
 }
 ```
@@ -67,14 +67,14 @@ $ curl -d "grant_type=authorization_code&code=fCUHnidI4tOidJLS&client_id=client1
 #### Refreshing an Access Token
 
 ```
-$ curl -u client1:secret1 -d "grant_type=refresh_token&refresh_token=wlvX9..." http:/localhost:3000/token
+$ curl -u client1:secret1 -d "grant_type=refresh_token&refresh_token=wlvX9..." http://localhost:3000/oauth2/token
 ```
 
 ```
 {
     "access_token":"rlM7p...",
     "refresh_token":"01Lo4...",
-    "expires_in":"2015-08-18T10:10:22.144Z",
+    "expires_in":3600,
     "token_type":"Bearer"
 }
 ```
@@ -121,7 +121,7 @@ $ curl -d "grant_type=password&client_id=client1&client_secret=secret1&username=
 {
     "access_token":"SDXfE...",
     "refresh_token":"sgxHw...",
-    "expires_in":"2015-08-18T10:17:06.667Z",
+    "expires_in":3600,
     "token_type":"Bearer"
 }
 ```
@@ -140,7 +140,7 @@ $ curl -d "grant_type=client_credentials&client_id=client1&client_secret=secret1
 ```
 {
     "access_token":"oRoId...",
-    "expires_in":1800,
+    "expires_in":3600,
     "token_type":"Bearer"
 }
 ```
@@ -152,7 +152,8 @@ Accessing the Protected Resource
 The access token can now be used to get access to the protected resource, in this example the `/restricted` URI:
 
 ```
-$ curl -H "Authorization: Bearer MEwck..." http://localhost:3000/restricted
+$ curl -H "Authorization: Bearer MEwck..." http://localhost:3000/time
+$ curl http://localhost:3000/time?access_token=MEwck...
 ```
 
 

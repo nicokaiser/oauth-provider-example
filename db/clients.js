@@ -2,7 +2,8 @@
 
 var clients = [
     { clientId: 'client1', name: 'Client 1', clientSecret: 'secret1' },
-    { clientId: 'oauth-consumer-example', name: 'OAuth Consumer Example Client', clientSecret: 'secret2' }
+    { clientId: 'oauth-consumer-example', name: 'OAuth Consumer Example Client', clientSecret: 'secret2' },
+    { clientId: 'google-playground', name: 'Google OAuth 2.0 Playground', clientSecret: 'foo' }
 ];
 
 exports.findByClientId = function (clientId, done) {

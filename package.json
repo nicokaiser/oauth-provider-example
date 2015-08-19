@@ -9,6 +9,7 @@
     "ejs": "^2.3.3",
     "express": "4.x.x",
     "express-session": "^1.11.3",
+    "jwt-simple": "^0.3.0",
     "morgan": "^1.6.1",
     "oauth2orize": "1.x.x",
     "passport": "0.2.x",

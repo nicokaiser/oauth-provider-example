@@ -1,6 +1,6 @@
 <% include header %>
 <p><b><%= client.name %></b> is requesting access to your account.</p>
-<form action="/authorization" method="POST">
+<form action="" method="POST">
     <input name="transaction_id" type="hidden" value="<%= transactionID %>">
     <input type="submit" value="Allow" id="allow">
     <input type="submit" value="Deny" name="cancel" id="deny">

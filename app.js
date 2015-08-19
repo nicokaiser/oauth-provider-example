@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var morgan = require('morgan');
 var passport = require('passport');
 var session = require('express-session');
-var oauth = require('./oauth');
+var oauth = require('./lib/oauth');
 
 
 var app = express();
@@ -19,7 +19,7 @@ app.use(session({name: 'oauth-provider.sid', secret: 'keyboard cat', resave: tru
 app.use(passport.initialize());
 app.use(passport.session());
 
-require('./auth');
+require('./lib/auth');
 
 
 app.get('/', function (req, res) {
@@ -40,11 +40,11 @@ app.use('/logout', function (req, res) {
     res.redirect('/');
 });
 
-app.get('/authorization', oauth.authorization);
+app.get('/oauth2/auth', oauth.authorization);
 
-app.post('/authorization', oauth.decision);
+app.post('/oauth2/auth', oauth.decision);
 
-app.post('/token', oauth.token);
+app.post('/oauth2/token', oauth.token);
 
 app.get('/restricted', passport.authenticate('accessToken', {session: false}), function (req, res) {
     res.send('Yay, you successfully accessed the restricted resource!');
