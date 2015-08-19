@@ -88,7 +88,7 @@ The implicit grant type is used for web applications running in a browser (e.g. 
 #### Authorization Request
 
 ```
-http://localhost:3000/authorization?response_type=token&client_id=client1&state=xyz&redirect_uri=http://api.example.com/cb
+http://localhost:3000/oauth2/auth?response_type=token&client_id=client1&state=xyz&redirect_uri=http://api.example.com/cb
 ```
 
 After pressing "Allow", the user is redirected to the `redirect_uri` with the access token data in the URL hash:
@@ -114,7 +114,7 @@ This grant type is used for trusted clients grants access tokens for credentials
 #### Authorization Request
 
 ```
-$ curl -d "grant_type=password&client_id=client1&client_secret=secret1&username=bob&password=secret" http://localhost:3000/token
+$ curl -d "grant_type=password&client_id=client1&client_secret=secret1&username=bob&password=secret" http://localhost:3000/oauth2/token
 ```
 
 ```
@@ -134,7 +134,7 @@ The client (e.g. an application) needs to request an access token by using only 
 #### Authorization Request
 
 ```
-$ curl -d "grant_type=client_credentials&client_id=client1&client_secret=secret1" http://localhost:3000/token
+$ curl -d "grant_type=client_credentials&client_id=client1&client_secret=secret1" http://localhost:3000/oauth2/token
 ```
 
 ```
