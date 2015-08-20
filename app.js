@@ -7,6 +7,7 @@ var morgan = require('morgan');
 var passport = require('passport');
 var session = require('express-session');
 var oauth = require('./lib/oauth');
+var db = require('./db');
 
 
 var app = express();
@@ -50,11 +51,14 @@ app.get('/restricted', passport.authenticate('accessToken', {session: false}), f
     res.send('Yay, you successfully accessed the restricted resource!');
 });
 
-app.get('/me', passport.authenticate('accessToken', {session: false}), function (req, res) {
-    res.send({
-        id: req.user.id,
-        name: req.user.name,
-        username: req.user.username
+app.get('/me', passport.authenticate('accessToken', {session: false}), function (req, res, next) {
+    db.users.findById(req.user.id, function (err, user) {
+        if (err) return next(err);
+        res.send({
+            id: user.id,
+            name: req.user.name,
+            username: user.username
+        });
     });
 });
 
