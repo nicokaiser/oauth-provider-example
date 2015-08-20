@@ -1,8 +1,19 @@
 'use strict';
 
+var bcrypt = require('bcrypt');
+
 var users = [
-    { id: 1, username: 'bob', password: '$2a$04$.GqR8TQy78M3N/v1dh9fKul23eQSSa5ChVAnIJlUq43UOJ93597FK' /* 'secret' */, name: 'Bob Smith' },
-    { id: 2, username: 'joe', password: '$2a$04$ZqXf8XLhspzQef4aacdQ8ut069esmA7nm5VkrGqEzDV0z8LA9XlQ.' /* 'password' */, name: 'Joe Davis' }
+    {
+        id: 1,
+        username: 'bob',
+        password: '$2a$04$.GqR8TQy78M3N/v1dh9fKul23eQSSa5ChVAnIJlUq43UOJ93597FK', // 'secret'
+        name: 'Bob Smith'
+    }, {
+        id: 2,
+        username: 'joe',
+        password: '$2a$04$ZqXf8XLhspzQef4aacdQ8ut069esmA7nm5VkrGqEzDV0z8LA9XlQ.', // 'password'
+        name: 'Joe Davis'
+    }
 ];
 
 exports.findById = function (id, done) {
@@ -23,4 +34,14 @@ exports.findByUsername = function (username, done) {
         }
     }
     return done(null, null);
+};
+
+exports.checkCredentials = function (username, password, done) {
+    for (var i = 0, len = users.length; i < len; i++) {
+        var user = users[i];
+        if (user.username === username) {
+            return bcrypt.compare(password, user.password, done);
+        }
+    }
+    return done(null, false);
 };
