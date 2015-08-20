@@ -11,7 +11,7 @@ var clients = [
         clientId: 'oauth-consumer-example',
         clientSecret: 'secret2',
         name: 'OAuth Consumer Example Client',
-        redirectURI: 'http://localhost:3002/auth/example',
+        redirectURI: 'http://localhost:3002/auth/example/callback',
         trusted: true
     }, {
         clientId: 'google-playground',
