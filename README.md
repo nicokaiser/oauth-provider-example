@@ -37,7 +37,7 @@ Once the use is logged in (try "bob", "secret" in this example), the authorizati
 
 ```
 HTTP/1.1 302 Found
-Location: http://api.example.com/cb?code=fCUHnidI4tOidJLS&state=xyz
+Location: http://api.example.com/cb?code=fCUHn...&state=xyz
 ```
 
 If pressing "Deny", an `error` parameter is added to the `redirect_uri`:
@@ -52,7 +52,7 @@ Location: http://api.example.com/cb?error=access_denied&state=xyz
 The web server application can request access tokens and refres tokens in the background by using the code:
 
 ```
-$ curl -d "grant_type=authorization_code&code=fCUHnidI4tOidJLS&client_id=client1&client_secret=secret1&redirect_uri=http://api.example.com/cb" http://localhost:3000/oauth2/token
+$ curl -d "grant_type=authorization_code&code=fCUHn...&client_id=client1&client_secret=secret1&redirect_uri=http://api.example.com/cb" http://localhost:3000/oauth2/token
 ```
 
 ```
@@ -67,7 +67,7 @@ $ curl -d "grant_type=authorization_code&code=fCUHnidI4tOidJLS&client_id=client1
 #### Refreshing an Access Token
 
 ```
-$ curl -u client1:secret1 -d "grant_type=refresh_token&refresh_token=wlvX9..." http://localhost:3000/oauth2/token
+$ curl -u client1:secret1 -d "grant_type=refresh_token&refresh_token=kjzpM..." http://localhost:3000/oauth2/token
 ```
 
 ```
@@ -155,13 +155,6 @@ The access token can now be used to get access to the protected resource, in thi
 $ curl -H "Authorization: Bearer MEwck..." http://localhost:3000/time
 $ curl http://localhost:3000/time?access_token=MEwck...
 ```
-
-
-Todo
-----
-- Do we really need client_secret in grant_type=refresh_token?
-- Do we really need client_secret in grant_type=password?
-- Implement trusted clients that need no dialog (immediate decision?)
 
 
 Credits
