@@ -16,7 +16,8 @@
     "passport-http": "0.2.x",
     "passport-http-bearer": "1.x.x",
     "passport-local": "^1.0.0",
-    "passport-oauth2-client-password": "0.1.x"
+    "passport-oauth2-client-password": "0.1.x",
+    "utils-merge": "^1.0.0"
   },
   "repository": {
     "type": "git",

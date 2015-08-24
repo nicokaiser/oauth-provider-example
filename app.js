@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var morgan = require('morgan');
 var passport = require('passport');
 var session = require('express-session');
-var oauth = require('./lib/oauth');
+var provider = require('./lib/provider');
 
 
 var app = express();
@@ -25,11 +25,7 @@ require('./lib/auth');
 
 // OpenID Connect 1.0 endpoints
 
-app.get('/oauth2/auth', oauth.authorization);
-app.post('/oauth2/auth', oauth.decision);
-app.post('/oauth2/token', oauth.token);
-app.get('/oauth2/userinfo', oauth.userinfo);
-app.get('/.well-known/openid-configuration', oauth.discovery);
+app.use(provider());
 
 
 // Local login endpoints
