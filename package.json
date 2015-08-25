@@ -10,13 +10,16 @@
     "express": "4.x.x",
     "express-session": "^1.11.3",
     "jwt-simple": "^0.3.0",
+    "lodash.clone": "^3.0.3",
     "morgan": "^1.6.1",
-    "oauth2orize": "jaredhanson/oauth2orize-openid#master",
+    "oauth2orize": "1.0.x",
+    "oauth2orize-openid": "jaredhanson/oauth2orize-openid#master",
     "passport": "0.2.x",
     "passport-http": "0.2.x",
     "passport-http-bearer": "1.x.x",
     "passport-local": "^1.0.0",
     "passport-oauth2-client-password": "0.1.x",
+    "rsa-pem-to-jwk": "^1.1.3",
     "utils-merge": "^1.0.0"
   },
   "repository": {
