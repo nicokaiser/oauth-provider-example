@@ -1,7 +1,10 @@
 <% include header %>
+<h2>Login</h2>
 <form action="/login" method="post">
-    <input placeholder="Username" type="text" value="bob" name="username">
-    <input placeholder="Password" type="password" value="secret" name="password">
-    <input type="submit" value="Login">
+    <p>
+        <input placeholder="Username" type="text" value="bob@example.com" name="username">
+        <input placeholder="Password" type="password" value="secret" name="password">
+    </p>
+    <p><input type="submit" value="Login"></p>
 </form>
 <% include footer %>
