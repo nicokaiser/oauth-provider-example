@@ -3,16 +3,14 @@
 var users = [
     {
         id: 1,
-        username: 'bob',
         email: 'bob@example.com',
-        password: 'secret',
-        name: 'Bob Smith'
+        name: 'Bob Smith',
+        password: 'secret'
     }, {
         id: 2,
-        username: 'joe',
         email: 'joe@example.com',
-        password: 'password',
-        name: 'Joe Davis'
+        name: 'Joe Davis',
+        password: 'password'
     }
 ];
 
@@ -26,10 +24,10 @@ exports.findById = function (id, done) {
     return done(null, null);
 };
 
-exports.findByUsername = function (username, done) {
+exports.findByUsername = function (email, done) {
     for (var i = 0, len = users.length; i < len; i++) {
         var user = users[i];
-        if (user.username === username) {
+        if (user.email === email) {
             return done(null, user);
         }
     }
@@ -39,7 +37,7 @@ exports.findByUsername = function (username, done) {
 exports.checkCredentials = function (username, password, done) {
     for (var i = 0, len = users.length; i < len; i++) {
         var user = users[i];
-        if (user.username === username) {
+        if (user.email === username) {
             return done(null, (user.password === password));
         }
     }
