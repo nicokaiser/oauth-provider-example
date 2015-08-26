@@ -14,7 +14,7 @@
     "lodash.clone": "^3.0.3",
     "morgan": "^1.6.1",
     "oauth2orize": "1.0.x",
-    "oauth2orize-openid": "jaredhanson/oauth2orize-openid#master",
+    "oauth2orize-openid": "nicokaiser/oauth2orize-openid#2ad2dd9",
     "passport": "0.2.x",
     "passport-http": "0.2.x",
     "passport-http-bearer": "1.x.x",
