@@ -146,6 +146,17 @@ $ curl -d "grant_type=client_credentials&client_id=client1&client_secret=secret1
 ```
 
 
+Accessing the Protected Resource
+--------------------------------
+
+The access token can now be used to get access to the protected resource, in this example the `/restricted` URI:
+
+```
+$ curl -H "Authorization: Bearer MEwck..." http://localhost:3000/time
+$ curl http://localhost:3000/time?access_token=MEwck...
+```
+
+
 OpenID Connect
 --------------
 
@@ -188,17 +199,6 @@ According to the configuration, a "Discovery Document" is being served to enable
 
 ```
 http://localhost:3000/.well-known/openid-configuration
-```
-
-
-Accessing the Protected Resource
---------------------------------
-
-The access token can now be used to get access to the protected resource, in this example the `/restricted` URI:
-
-```
-$ curl -H "Authorization: Bearer MEwck..." http://localhost:3000/time
-$ curl http://localhost:3000/time?access_token=MEwck...
 ```
 
 
