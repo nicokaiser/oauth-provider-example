@@ -1,7 +1,7 @@
 OAuth 2.0 Provider Example
 ==========================
 
-A simple OAuth 2.0 provider example that uses [oauth2orize](https://github.com/jaredhanson/oauth2orize), [Passport](http://passportjs.org/) and [Express](http://expressjs.com/) and implements several OAuth 2.0 flows.
+A simple OAuth 2.0 and [OpenID Connect 1.0](http://openid.net/specs/openid-connect-core-1_0.html) provider example that uses [oauth2orize](https://github.com/jaredhanson/oauth2orize), [Passport](http://passportjs.org/) and [Express](http://expressjs.com/) and implements several OAuth 2.0 flows.
 
 Note that this is only an example, in production systems you probably want to use proper databases and HTTPS.
 
@@ -146,6 +146,51 @@ $ curl -d "grant_type=client_credentials&client_id=client1&client_secret=secret1
 ```
 
 
+OpenID Connect
+--------------
+
+### OpenID Connect Grants
+
+Beside the `code` and `token` grant types, this provider implements several OpenID types: `id_token`, `id_token token`, `code id_token`, `code token`, `code id_token token`.
+
+```
+http://localhost:3000/oauth2/auth?response_type=token%20id_token&client_id=client1&state=xyz&redirect_uri=http://api.example.com/cb
+```
+
+This request works like the `token` flow above, but the response includes an `id_token` JSON Web Token with identity information:
+
+```
+http://api.example.com/cb#access_token=eyJ...&expires_in=3600&token_type=Bearer&state=xyz&id_token=eyJ...
+```
+
+### Special Endpoints
+
+#### UserInfo Endpoint
+
+The additional UserInfo Endpoint (a "Protected Resource", i.e. needs an access_token in the Authorization header) returns a JSON object with information about the user associated to the access_token:
+
+```
+$ curl -H "Authorization: Bearer MEwck..." http://localhost:3000/oauth2/userinfo
+```
+
+```
+{
+    "sub": 1,
+    "name": "Bob Smith",
+    "email": "bob.smith@example.com"
+}
+```
+
+
+####  Discovery Document
+
+According to the configuration, a "Discovery Document" is being served to enable OpenID auto discovery, like described in [OpenID Connect Discovery 1.0](http://openid.net/specs/openid-connect-discovery-1_0.html):
+
+```
+http://localhost:3000/.well-known/openid-configuration
+```
+
+
 Accessing the Protected Resource
 --------------------------------
 
@@ -162,7 +207,9 @@ Credits
 
 - https://github.com/reneweb/
 - https://github.com/jaredhanson/oauth2orize/
+- https://github.com/jaredhanson/oauth2orize-openid/
 - https://tools.ietf.org/html/rfc6749
+- http://openid.net/developers/specs/
 
 
 License
