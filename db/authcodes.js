@@ -35,3 +35,7 @@ exports.get = function (token, done) {
         scope: data.scope
     });
 };
+
+exports.remove = function (token, done) {
+    return done(null);
+};
