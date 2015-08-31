@@ -27,7 +27,7 @@ app.use(session({
         ttl: 1 * 24 * 3600
     }),
     cookie: {
-        maxAge: 1 * 24 * 3600
+        maxAge: 1 * 24 * 3600 * 1000
     }
 }));
 app.use(passport.initialize());
