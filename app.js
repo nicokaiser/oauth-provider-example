@@ -7,6 +7,7 @@ var morgan = require('morgan');
 var passport = require('passport');
 var session = require('express-session');
 var provider = require('./lib/provider');
+var FileStore = require('session-file-store')(session);
 
 
 var app = express();
@@ -16,7 +17,19 @@ app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
-app.use(session({name: 'oauth-provider.sid', secret: 'keyboard cat', resave: true, saveUninitialized: true}));
+app.use(session({
+    name: 'auth.sid',
+    secret: 'ooDu8tiu2heiQu4eKesohK5xooTh0cu1',
+    resave: true,
+    saveUninitialized: true,
+    store: new FileStore({
+        path: './sessions',
+        ttl: 1 * 24 * 3600
+    }),
+    cookie: {
+        maxAge: 1 * 24 * 3600
+    }
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 
