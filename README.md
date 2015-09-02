@@ -33,7 +33,7 @@ The authorization code grant flow is typically used for web server applications.
 http://localhost:3000/oauth2/auth?response_type=code&client_id=client1&state=xyz&redirect_uri=http://api.example.com/cb
 ```
 
-Once the use is logged in (try "bob", "secret" in this example), the authorization dialog is displayed ("Client 1 is requesting access to your account."). After pressing "Allow", the user is redirected to the `redirect_uri` with a `code` parameter:
+Once the use is logged in (try "bob@example.com", "secret" in this example), the authorization dialog is displayed ("Client 1 is requesting access to your account."). After pressing "Allow", the user is redirected to the `redirect_uri` with a `code` parameter:
 
 ```
 HTTP/1.1 302 Found
@@ -114,7 +114,7 @@ This grant type is used for trusted clients grants access tokens for credentials
 #### Authorization Request
 
 ```
-$ curl -d "grant_type=password&client_id=client1&client_secret=secret1&username=bob&password=secret" http://localhost:3000/oauth2/token
+$ curl -d "grant_type=password&client_id=client1&username=bob@example.com&password=secret" http://localhost:3000/oauth2/token
 ```
 
 ```
@@ -188,7 +188,7 @@ $ curl -H "Authorization: Bearer MEwck..." http://localhost:3000/oauth2/userinfo
 {
     "sub": 1,
     "name": "Bob Smith",
-    "email": "bob.smith@example.com"
+    "email": "bob@example.com"
 }
 ```
 
