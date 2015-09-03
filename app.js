@@ -67,10 +67,12 @@ app.use('/logout', function (req, res) {
 
 // Protected resources
 
+app.options('/restricted', cors());
 app.get('/restricted', cors(), passport.authenticate('accessToken', {session: false}), function (req, res) {
     res.send('Yay, you successfully accessed the restricted resource!');
 });
 
+app.options('/time', cors());
 app.get('/time', cors(), passport.authenticate('accessToken', {session: false}), function (req, res) {
     res.send(new Date());
 });
