@@ -6,8 +6,11 @@ var cookieParser = require('cookie-parser');
 var morgan = require('morgan');
 var passport = require('passport');
 var session = require('express-session');
-var provider = require('./lib/provider');
 var FileStore = require('session-file-store')(session);
+var cors = require('cors');
+
+
+var provider = require('./lib/provider');
 
 
 var app = express();
@@ -64,11 +67,11 @@ app.use('/logout', function (req, res) {
 
 // Protected resources
 
-app.get('/restricted', passport.authenticate('accessToken', {session: false}), function (req, res) {
+app.get('/restricted', cors(), passport.authenticate('accessToken', {session: false}), function (req, res) {
     res.send('Yay, you successfully accessed the restricted resource!');
 });
 
-app.get('/time', passport.authenticate('accessToken', {session: false}), function (req, res) {
+app.get('/time', cors(), passport.authenticate('accessToken', {session: false}), function (req, res) {
     res.send(new Date());
 });
 
