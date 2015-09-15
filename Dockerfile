@@ -1,4 +1,4 @@
-FROM node:0.12
+FROM node:4.0
 ADD ./package.json /src/
 RUN cd /src && npm install --production
 WORKDIR /src
