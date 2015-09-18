@@ -38,6 +38,7 @@ exports.checkCredentials = function (username, password, done) {
     for (var i = 0, len = users.length; i < len; i++) {
         var user = users[i];
         if (user.email === username) {
+            if (!user.password === password) return done(null, false);
             return done(null, user);
         }
     }
