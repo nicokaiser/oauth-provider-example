@@ -41,7 +41,7 @@ require('./lib/auth');
 
 // OpenID Connect 1.0 endpoints
 
-app.use(provider());
+app.use(provider({}));
 
 
 // Local login endpoints
