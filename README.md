@@ -192,8 +192,23 @@ $ curl -H "Authorization: Bearer MEwck..." http://localhost:3000/oauth2/userinfo
 }
 ```
 
+#### TokenInfo Endpoint
 
-####  Discovery Document
+The TokenInfo Endpoint validates an `id_token` JSON Web Token:
+
+```
+$ curl -X "POST" -H "Content-Type: application/json" -d '{"id_token":"eyJ0e..."}' http://localhost:3000/oauth2/tokeninfo
+```
+
+```
+{
+    "sub": 1,
+    "name": "Bob Smith",
+    "email": "bob@example.com"
+}
+```
+
+#### Discovery Document
 
 According to the configuration, a "Discovery Document" is being served to enable OpenID auto discovery, like described in [OpenID Connect Discovery 1.0](http://openid.net/specs/openid-connect-discovery-1_0.html):
 
