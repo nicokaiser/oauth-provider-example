@@ -33,3 +33,13 @@ exports.get = function (token, done) {
         scope: data.scope
     });
 };
+
+exports.remove = function (token, done) {
+    // not applicable with JWT refresh tokens
+    return done(null);
+};
+
+exports.removeByUserId = function (userId, done) {
+    // not applicable with JWT refresh tokens
+    return done(null);
+};

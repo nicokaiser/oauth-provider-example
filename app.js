@@ -27,7 +27,8 @@ app.use(session({
     saveUninitialized: true,
     store: new FileStore({
         path: './sessions',
-        ttl: 1 * 24 * 3600
+        ttl: 1 * 24 * 3600,
+        reapInterval: 1 * 60
     }),
     cookie: {
         maxAge: 1 * 24 * 3600 * 1000
