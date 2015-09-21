@@ -49,7 +49,7 @@ Location: http://api.example.com/cb?error=access_denied&state=xyz
 
 #### Access Token Request
 
-The web server application can request access tokens and refres tokens in the background by using the code:
+The web server application can request access tokens and refresh tokens in the background by using the code:
 
 ```
 $ curl -d "grant_type=authorization_code&code=fCUHn...&client_id=client1&client_secret=secret1&redirect_uri=http://api.example.com/cb" http://localhost:3000/oauth2/token
