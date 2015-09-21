@@ -10,7 +10,7 @@
     "ejs": "^2.3.3",
     "express": "4.x.x",
     "express-session": "^1.11.3",
-    "jwt-simple": "^0.3.0",
+    "jsonwebtoken": "^5.0.5",
     "lodash.clone": "^3.0.3",
     "morgan": "^1.6.1",
     "node-sync-walker": "^0.1.0",

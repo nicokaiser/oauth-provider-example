@@ -1,41 +1,35 @@
 'use strict';
 
-var jwt = require('jwt-simple');
+var jwt = require('jsonwebtoken');
 
 exports.secret = 'keyboard cat';
+exports.algorithm = 'HS256';
+exports.ttl = 10;
 
 exports.create = function (data, done) {
-    var token = {
-        typ: 'code',
+    var token = jwt.sign({
         aud: data.clientId,
         sub: data.userId,
-        exp: data.expires,
-        redirect: data.redirectURI,
         scope: data.scope
-    };
-    done(null, jwt.encode(token, exports.secret));
+    }, exports.secret, {
+        algorithm: exports.algorithm,
+        expiresInSeconds: exports.ttl
+    });
+    done(null, token);
 };
 
 exports.get = function (token, done) {
-    var data;
-    try {
-        data = jwt.decode(token, exports.secret);
-    } catch (err) {
-        return done(err);
-    }
-
-    if (data.typ !== 'code') return done(null, false);
-    if (token.exp && token.exp < Math.floor(Date.now() / 1000)) return done(null, false);
-
-    done(null, {
-        clientId: data.aud,
-        userId: data.sub,
-        expires: data.exp,
-        redirectURI: data.redirect,
-        scope: data.scope
+    jwt.verify(token, exports.secret, function (err, decoded) {
+        if (err) return done(null, false);
+        done(null, {
+            clientId: decoded.aud,
+            userId: decoded.sub,
+            scope: decoded.scope
+        });
     });
 };
 
 exports.remove = function (token, done) {
+    // not applicable with JWT refresh tokens
     return done(null);
 };
