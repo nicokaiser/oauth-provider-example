@@ -86,9 +86,11 @@ app.use(function (req, res) {
     res.status(404).render('error', {err: err});
 });
 
+/*
 app.use(function (err, req, res, next) {
     res.render('error', {err: err});
 });
+*/
 
 
 app.listen(3000);

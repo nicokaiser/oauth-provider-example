@@ -1,40 +1,41 @@
 'use strict';
 
-var jwt = require('jsonwebtoken');
+var randomstring = require('randomstring');
 
-exports.secret = 'keyboard cat';
-exports.algorithm = 'HS256';
 exports.ttl = 3600 * 24 * 30;
 
+var memory = {};
+
 exports.create = function (data, done) {
-    var token = jwt.sign({
-        aud: data.clientId,
-        sub: data.userId,
-        scope: data.scope
-    }, exports.secret, {
-        algorithm: exports.algorithm,
-        expiresInSeconds: exports.ttl
-    });
+    var token = randomstring.generate(20);
+    memory[token] = {
+        expires: Date.now() + exports.ttl * 1000,
+        payload: data
+    };
     done(null, token);
 };
 
 exports.get = function (token, done) {
-    jwt.verify(token, exports.secret, function (err, decoded) {
-        if (err) return done(null, false);
-        done(null, {
-            clientId: decoded.aud,
-            userId: decoded.sub,
-            scope: decoded.scope
-        });
-    });
+    var value = memory[token];
+
+    // not found
+    if (!value) return done(null, false);
+
+    // expired
+    if (value.expires <= Date.now()) {
+        delete memory[token];
+        return done(null, false);
+    }
+
+    return done(null, value.payload);
 };
 
 exports.remove = function (token, done) {
-    // not applicable with JWT refresh tokens
+    delete memory[token];
     return done(null);
 };
 
 exports.removeByUserId = function (userId, done) {
-    // not applicable with JWT refresh tokens
+    // TODO
     return done(null);
 };
